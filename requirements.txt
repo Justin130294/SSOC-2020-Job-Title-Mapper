@@ -1,1 +1,6 @@
-
+pandas
+streamlit
+transformers
+sentence_transformers
+torch
+numpy
