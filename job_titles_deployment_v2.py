@@ -74,9 +74,12 @@ def filter_job_titles(indices, job_suggestions_csim, threshold):
     output_df.index = np.arange(1, len(output_df) + 1)
     return output_df
 
-alpha_index_data = pd.read_excel('alpha_index.xlsx')
-alpha_index_df = pd.DataFrame(alpha_index_data)
-alpha_index_titles_list = list(alpha_index_df['titles'])
+@st.cache_data
+def get_titles():
+    alpha_index_data = pd.read_excel('alpha_index.xlsx')
+    alpha_index_df = pd.DataFrame(alpha_index_data)
+    return list(alpha_index_df['titles'])
+alpha_index_titles_list = get_titles()
 
 ##### UI Implementation #####
 # Load the model, tokenizer and embedding
@@ -95,7 +98,8 @@ job_title = st.text_input(label="Job Title", max_chars = 64,
               placeholder='Enter job title')
 
 if job_title != '':
-    threshold = st.slider('Adjust Cosine Similarity Threshold', value=0.8, min_value=0.7, max_value=0.9, step=0.1)
+    # threshold = st.slider('Adjust Cosine Similarity Threshold', value=0.8, min_value=0.7, max_value=0.9, step=0.1)
+    threshold = 0.6
     with st.spinner("Generating possible job titles"):
         indices, cos_sim_scores = generate_job_titles(job_title)
         output = filter_job_titles(indices, cos_sim_scores, threshold)
