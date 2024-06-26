@@ -23,7 +23,7 @@ def download_and_load_model():
         os.makedirs(model_path)
         # Google Drive URL
         url = "https://drive.google.com/drive/folders/1zYfaWYa2hTMvVqnv4FSojsUNcymj_Uca"
-        output_folder = os.path.join(model_path, 'model.zip')
+        output = os.path.join(model_path, 'model.zip')
         gdown.download_folder(url, output, quiet=False)
         import zipfile
         with zipfile.ZipFile(output, 'r') as zip_ref:
