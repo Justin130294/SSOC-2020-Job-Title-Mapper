@@ -9,9 +9,6 @@ import torch
 import numpy as np
 import gdown
 
-# Set up working directory
-wk_dir = '/Users/justinng/Documents/Work/Internship/2023-2024/MOM June/SSOC Predictor Cleaner/Deployment'
-os.chdir(wk_dir)
 # Remove tokenizer parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
